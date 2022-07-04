@@ -15,7 +15,7 @@ SELECT * FROM `students` WHERE `date_of_birth` LIKE "1990%";
 SELECT * FROM `courses` WHERE `cfu` > 10;
 
 3.
-SELECT * FROM `students` WHERE `date_of_birth` < "1992-07-04";
+SELECT * FROM `students` WHERE `date_of_birth` < SUBDATE(CURRENT_DATE(), INTERVAL 30 YEAR);
 
 4.
 SELECT * FROM `courses` WHERE `period` = "I semestre" AND `year` = "1";
