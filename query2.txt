@@ -46,3 +46,6 @@ FROM departments
 SELECT courses.name FROM `courses` JOIN `course_teacher` ON courses.id = course_teacher.course_id JOIN `teachers` ON course_teacher.teacher_id = `teachers`.`id` WHERE teachers.id = 44;
 
 4.
+SELECT students.surname, students.name, degrees.name, departments.name FROM students JOIN degrees ON students.degree_id = degrees.id JOIN departments ON departments.id = degrees.department_id ORDER BY `students`.`surname`, students.name ASC;
+
+5.
