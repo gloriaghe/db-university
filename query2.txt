@@ -48,7 +48,12 @@ SELECT students.surname, students.name, degrees.name, departments.name FROM stud
 5.
 SELECT degrees.name, courses.name, teachers.name, teachers.surname FROM `courses` JOIN degrees ON degrees.id = courses.degree_id JOIN course_teacher ON course_teacher.course_id = courses.id JOIN teachers ON teachers.id = course_teacher.teacher_id;
 
-6.
+6. (70 risultati)
 SELECT teachers.name, teachers.surname FROM `courses` JOIN degrees ON degrees.id = courses.degree_id JOIN departments ON departments.id = degrees.department_id JOIN course_teacher ON course_teacher.course_id = courses.id JOIN teachers ON teachers.id = course_teacher.teacher_id WHERE departments.id = "5";
+con Distinct:
+SELECT DISTINCT teachers.name, teachers.surname FROM `courses` JOIN degrees ON degrees.id = courses.degree_id JOIN departments ON departments.id = degrees.department_id JOIN course_teacher ON course_teacher.course_id = courses.id JOIN teachers ON teachers.id = course_teacher.teacher_id WHERE departments.id = "5";
+
+6. Group BY (54 come da richiesta)
+SELECT teachers.name, teachers.surname, teachers.id FROM `courses` JOIN degrees ON degrees.id = courses.degree_id JOIN departments ON departments.id = degrees.department_id JOIN course_teacher ON course_teacher.course_id = courses.id JOIN teachers ON teachers.id = course_teacher.teacher_id WHERE departments.id = "5" GROUP BY teachers.id
 
 7.
