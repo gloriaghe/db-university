@@ -12,10 +12,7 @@ SELECT COUNT(`id`), YEAR(enrolment_date) FROM `students` GROUP BY YEAR(`enrolmen
 SELECT COUNT(`id`), office_address FROM `teachers` GROUP BY `office_address`;
 
 3.
-FIX:
-SELECT COUNT(`exam_id`) , ROUND(AVG(`vote`), 0) as `media`
-FROM `exam_student` 
-GROUP BY exam_id  
+SELECT exam_id , ROUND(AVG(`vote`), 0) as `media` FROM `exam_student` GROUP BY exam_id;
 
 4.
 SELECT COUNT(`id`), `department_id` FROM `degrees` GROUP BY `department_id`;
