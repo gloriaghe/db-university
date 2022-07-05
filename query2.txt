@@ -57,4 +57,4 @@ SELECT DISTINCT teachers.name, teachers.surname FROM `courses` JOIN degrees ON d
 SELECT teachers.name, teachers.surname, teachers.id FROM `courses` JOIN degrees ON degrees.id = courses.degree_id JOIN departments ON departments.id = degrees.department_id JOIN course_teacher ON course_teacher.course_id = courses.id JOIN teachers ON teachers.id = course_teacher.teacher_id WHERE departments.id = "5" GROUP BY teachers.id
 
 7.
-SELECT students.surname, students.name, COUNT(exam_student.student_id) FROM students JOIN exam_student ON students.id = exam_student.student_id JOIN exams ON exams.id = exam_student.exam_id JOIN courses ON exams.course_id = courses.id GROUP BY students.id
+SELECT CONCAT(students.surname, " ", students.name) AS studente, students.id, COUNT(courses.id) as tentativi_esame, courses.name as corso FROM students JOIN exam_student ON students.id = exam_student.student_id JOIN exams ON exams.id = exam_student.exam_id JOIN courses ON exams.course_id = courses.id GROUP BY students.id, students.surname, students.name, courses.name;
