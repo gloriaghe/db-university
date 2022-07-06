@@ -33,20 +33,18 @@ superare ciascuno dei suoi esami
 SELECT concat(students.name, ' ', students.surname) as fullname, degrees.name FROM students JOIN degrees ON students.degree_id = degrees.id WHERE degrees.name = "Corso di laurea in economia"
 
 2.
-SELECT degrees.name
-FROM departments
-	JOIN degrees ON departments.id = degrees.department_id
-	WHERE degrees.level = "magistrale"
-    AND degrees.department_id = "7";
+SELECT degrees.name FROM departments JOIN degrees ON departments.id = degrees.department_id AND degrees.department_id = departments.id WHERE degrees.level = "magistrale" AND departments.name = "Dipartimento di neuroscienze";
 
 3.
 SELECT courses.name FROM `courses` JOIN `course_teacher` ON courses.id = course_teacher.course_id JOIN `teachers` ON course_teacher.teacher_id = `teachers`.`id` WHERE teachers.id = 44;
+Per nome:
+SELECT courses.name FROM `courses` JOIN `course_teacher` ON courses.id = course_teacher.course_id JOIN `teachers` ON course_teacher.teacher_id = `teachers`.`id` WHERE teachers.name = "Fulvio" AND teachers.surname = "Amato";
 
 4.
 SELECT students.surname, students.name, degrees.name, departments.name FROM students JOIN degrees ON students.degree_id = degrees.id JOIN departments ON departments.id = degrees.department_id ORDER BY `students`.`surname`, students.name ASC;
 
 5.
-SELECT degrees.name, courses.name, teachers.name, teachers.surname FROM `courses` JOIN degrees ON degrees.id = courses.degree_id JOIN course_teacher ON course_teacher.course_id = courses.id JOIN teachers ON teachers.id = course_teacher.teacher_id;
+SELECT degrees.name, courses.name, teachers.name, teachers.surname FROM `courses` JOIN degrees ON degrees.id = courses.degree_id JOIN course_teacher ON course_teacher.course_id = courses.id JOIN teachers ON teachers.id = course_teacher.teacher_id ORDER BY degrees.name, courses.name;
 
 6. (70 risultati)
 SELECT teachers.name, teachers.surname FROM `courses` JOIN degrees ON degrees.id = courses.degree_id JOIN departments ON departments.id = degrees.department_id JOIN course_teacher ON course_teacher.course_id = courses.id JOIN teachers ON teachers.id = course_teacher.teacher_id WHERE departments.id = "5";
@@ -58,3 +56,6 @@ SELECT teachers.name, teachers.surname, teachers.id FROM `courses` JOIN degrees 
 
 7.
 SELECT CONCAT(students.surname, " ", students.name) AS studente, students.id, COUNT(courses.id) as tentativi_esame, courses.name as corso FROM students JOIN exam_student ON students.id = exam_student.student_id JOIN exams ON exams.id = exam_student.exam_id JOIN courses ON exams.course_id = courses.id GROUP BY students.id, students.surname, students.name, courses.name;
+
+con HAVING:
+SELECT CONCAT(students.surname, " ", students.name) AS studente, students.registration_number as matricola, courses.id AS id_corso, courses.name as corso, COUNT(courses.id - 1) as tentativi_esame, MAX(exam_student.vote) as voto FROM students JOIN exam_student ON students.id = exam_student.student_id JOIN exams ON exams.id = exam_student.exam_id JOIN courses ON exams.course_id = courses.id GROUP BY students.registration_number, students.surname, students.name, courses.name, courses.id HAVING voto > 17 ORDER BY `studente` ASC;
